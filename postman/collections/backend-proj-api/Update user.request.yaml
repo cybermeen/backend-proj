@@ -1,0 +1,17 @@
+$kind: http-request
+name: Update user
+url: http://localhost:3000/users/1
+method: PUT
+headers:
+  x-api-key: "{{api_key}}"
+body:
+  mode: raw
+  raw: |
+    {
+      "username": "updateduser",
+      "email": "updateduser@example.com",
+      "status": "active",
+      "user_role_id": 2,
+      "updated_by": 1
+    }
+order: 4255554635707090

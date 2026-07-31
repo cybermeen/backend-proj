@@ -1,0 +1,8 @@
+$kind: collection
+name: backend-proj-api
+variables:
+  api_key: ""
+auth:
+  - id: 8afad21b-c5b2-4b13-a8ae-8f608175c583
+    type: noauth
+    name: No Auth

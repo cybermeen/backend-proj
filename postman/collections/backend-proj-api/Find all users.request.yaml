@@ -1,0 +1,7 @@
+$kind: http-request
+name: Find all users
+url: http://localhost:3000/users
+method: GET
+headers:
+  x-api-key: "{{api_key}}"
+order: 3193129748654195
