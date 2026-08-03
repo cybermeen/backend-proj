@@ -50,6 +50,16 @@ function getUserNotFoundMessage() {
   return 'User not found';
 }
 
+function getMissingTokenMessage() {
+  return 'Missing or malformed Authorization header. Expected: Bearer <token>';
+}
+function getExpiredTokenMessage() {
+  return 'Your session has expired. Please log in again';
+}
+function getInvalidTokenMessage() {
+  return 'Invalid authentication token';
+}
+
 module.exports = {
   getRegistrationValidationMessage,
   getInvalidCredentialsMessage,
@@ -63,5 +73,8 @@ module.exports = {
   getInvalidRoleMessage,
   getApiKeyValidationFailedMessage,
   getUsersNotFoundMessage,
-  getUserNotFoundMessage
+  getUserNotFoundMessage,
+  getMissingTokenMessage,
+  getExpiredTokenMessage,
+  getInvalidTokenMessage
 };

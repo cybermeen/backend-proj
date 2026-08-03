@@ -4,6 +4,7 @@ const router = express.Router();
 const userService = require('../services/userService');
 const errorMessages = require('../utils/errorMessages');
 const HTTP_STATUS = require('../utils/httpStatusCodes');
+const authenticateToken = require('../utils/authMiddleware');
 
 async function getAllUsers(req, res) {
   try {
@@ -58,10 +59,10 @@ async function updateUserById(req, res) {
     }
 }
 
-router.get('/', getAllUsers);
-router.get('/:id', getUserById);
-router.delete('/:id', deleteUserById);
-router.put('/:id', updateUserById);
+router.get('/', authenticateToken, getAllUsers);
+router.get('/:id', authenticateToken, getUserById);
+router.put('/:id', authenticateToken, updateUserById);
+router.delete('/:id', authenticateToken, deleteUserById);
 
 module.exports = router;
 

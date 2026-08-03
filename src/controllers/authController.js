@@ -6,6 +6,8 @@ const { findApiKeyByValue } = require('../utils/apiKeyValidation');
 const errorMessages = require('../utils/errorMessages');
 const HTTP_STATUS = require('../utils/httpStatusCodes');
 
+const { generateToken } = require('../utils/jwtUtils');
+
 async function register(req, res) {
   try {
     const { username, email, password, status, user_role_id, created_by } = req.body;
@@ -44,9 +46,17 @@ async function login(req, res) {
     }
 
     const user = await authService.loginUser({ username, password });
+
+    const token = generateToken({
+      userId: user.id,
+      username: user.username,
+      roleId: user.user_role_id,
+    });
+
     res.status(HTTP_STATUS.OK).json({ 
       status: "Success",
       message: "Login successful",
+      token,
       data: {
         id: user.id,
         username: user.username,
@@ -56,8 +66,8 @@ async function login(req, res) {
           user_role_id: user.user_role_id,
           role_name: user.role_name 
         }
-      }    
-      });
+      }
+    });
   } catch (err) {
     if (err.code === 'INVALID_CREDENTIALS') return res.status(HTTP_STATUS.UNAUTHORIZED).json({ error: err.message });
     if (err.code === 'ACCOUNT_INACTIVE') return res.status(HTTP_STATUS.FORBIDDEN).json({ error: err.message });

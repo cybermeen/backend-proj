@@ -1,8 +1,9 @@
 $kind: http-request
+name: Login
 url: http://localhost:3000/auth/login
 method: POST
 headers:
-  x-api-key: wrong
+  x-api-key: "{{api_key}}"
 body:
   type: json
   content: "{\r
@@ -12,4 +13,16 @@ body:
     \  \"password\": \"SecurePass123!\"\r
 
     }"
+auth:
+  type: bearer
+scripts:
+  - type: afterResponse
+    code: "const response = pm.response.json();\r
+
+      if (response.token) {\r
+
+      \  pm.collectionVariables.set('access_token', response.token);\r
+
+      }"
+    language: text/javascript
 order: 1785308558142
