@@ -1,0 +1,48 @@
+$kind: http-request
+name: Create order
+url: http://localhost:3000/orders
+method: POST
+headers:
+  x-api-key: "{{api_key}}"
+body:
+  type: json
+  content: "{\r
+
+    \  \"invoice_no\": \"INV-1234\",\r
+
+    \  \"customer_name\": \"John Doe\",\r
+
+    \  \"payment_method\": \"card\",\r
+
+    \  \"subtotal\": 80.00,\r
+
+    \  \"tax\": 8.00,\r
+
+    \  \"discount\": 0.00,\r
+
+    \  \"grand_total\": 88.00,\r
+
+    \  \"items\": [\r
+
+    \    {\r
+
+    \      \"product_id\": 1,\r
+
+    \      \"product_name\": \"Widget\",\r
+
+    \      \"price\": 40.00,\r
+
+    \      \"quantity\": 2,\r
+
+    \      \"total\": 80.00\r
+
+    \    }\r
+
+    \  ]\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 4501748974028583

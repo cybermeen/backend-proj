@@ -1,6 +1,6 @@
 $kind: http-request
-name: Find all users
-url: http://localhost:3000/users
+name: Get all orders
+url: http://localhost:3000/orders
 method: GET
 headers:
   x-api-key: "{{api_key}}"
@@ -11,4 +11,4 @@ auth:
   type: bearer
   credentials:
     token: "{{access_token}}"
-order: 3193129748654195
+order: 4489248985985762
