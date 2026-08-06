@@ -33,14 +33,27 @@ async function createUser({ username, email, hashedPassword, status, user_role_i
 
 async function getAllUsers() {
   const result = await pool.query (
-    'SELECT * FROM users JOIN user_roles ON users.user_role_id = user_roles.id'
+    `SELECT u.id,
+    u.username,
+    u.email,
+    u.password,
+    u.status,
+    u.user_role_id,
+    u.created_by,
+    u.created_on,
+    u.updated_by,
+    u.updated_on,
+    r.role_name
+    FROM users u
+    JOIN user_roles r
+    ON u.user_role_id = r.id`
   );
   return result.rows;
 }
 
 async function getUserById(id) {
   const result = await pool.query (
-    'SELECT * FROM users JOIN user_roles ON users.user_role_id = user_roles.id WHERE users.id = $1',
+    'SELECT * FROM users u JOIN user_roles r ON u.user_role_id = r.id WHERE u.id = $1',
     [id]
   );
   return result.rows[0];
