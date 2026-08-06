@@ -38,6 +38,26 @@ function getInvalidRoleMessage() {
   return 'Invalid user_role_id — that role does not exist';
 }
 
+function getInvalidOrderPayloadMessage() {
+  return 'Invalid order payload. Required fields: invoice_no, customer_name, payment_method, subtotal, grand_total, items';
+}
+
+function getOrderCreationFailedMessage() {
+  return 'Order creation failed';
+}
+
+function getProductNotFoundMessage() {
+  return 'Product not found';
+}
+
+function getPurchaseNotFoundMessage() {
+  return 'Purchase not found';
+}
+
+function getOrderNotFoundMessage() {
+  return 'Order not found';
+}
+
 function getApiKeyValidationFailedMessage() {
   return 'API key validation failed';
 }
@@ -71,6 +91,11 @@ module.exports = {
   getAccountInactiveMessage,
   getDuplicateUserMessage,
   getInvalidRoleMessage,
+  getInvalidOrderPayloadMessage,
+  getOrderCreationFailedMessage,
+  getProductNotFoundMessage,
+  getPurchaseNotFoundMessage,
+  getOrderNotFoundMessage,
   getApiKeyValidationFailedMessage,
   getUsersNotFoundMessage,
   getUserNotFoundMessage,
