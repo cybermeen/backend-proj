@@ -42,12 +42,56 @@ function getInvalidOrderPayloadMessage() {
   return 'Invalid order payload. Required fields: invoice_no, customer_name, payment_method, subtotal, grand_total, items';
 }
 
+function getOrderValidationMessage() {
+  return 'Invalid order payload. Required fields: customer_name, payment_method, items';
+}
+
+function getOrderItemValidationMessage() {
+  return 'Invalid order item payload. Required fields: product_id and quantity';
+}
+
+function getPurchaseValidationMessage() {
+  return 'Invalid purchase payload. Required fields: invoice_no, supplier_name, items';
+}
+
 function getOrderCreationFailedMessage() {
   return 'Order creation failed';
 }
 
+function getOrderFetchFailedMessage() {
+  return 'Unable to fetch order';
+}
+
+function getOrderProcessingFailedMessage() {
+  return 'Order processing failed';
+}
+
+function getPurchaseCreationFailedMessage() {
+  return 'Purchase creation failed';
+}
+
+function getPurchaseFetchFailedMessage() {
+  return 'Unable to fetch purchase';
+}
+
+function getPurchaseProcessingFailedMessage() {
+  return 'Purchase processing failed';
+}
+
 function getProductNotFoundMessage() {
   return 'Product not found';
+}
+
+function getProductFetchFailedMessage() {
+  return 'Unable to fetch product';
+}
+
+function getProductCreationFailedMessage() {
+  return 'Product creation failed';
+}
+
+function getProductProcessingFailedMessage() {
+  return 'Product processing failed';
 }
 
 function getPurchaseNotFoundMessage() {
@@ -92,8 +136,19 @@ module.exports = {
   getDuplicateUserMessage,
   getInvalidRoleMessage,
   getInvalidOrderPayloadMessage,
+  getOrderValidationMessage,
+  getOrderItemValidationMessage,
+  getPurchaseValidationMessage,
   getOrderCreationFailedMessage,
+  getOrderFetchFailedMessage,
+  getOrderProcessingFailedMessage,
+  getPurchaseCreationFailedMessage,
+  getPurchaseFetchFailedMessage,
+  getPurchaseProcessingFailedMessage,
   getProductNotFoundMessage,
+  getProductFetchFailedMessage,
+  getProductCreationFailedMessage,
+  getProductProcessingFailedMessage,
   getPurchaseNotFoundMessage,
   getOrderNotFoundMessage,
   getApiKeyValidationFailedMessage,
