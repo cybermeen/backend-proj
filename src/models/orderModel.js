@@ -1,3 +1,4 @@
+//order by customer
 const pool = require('../config/db');
 
 async function getAllOrders() {
@@ -27,50 +28,29 @@ async function getOrderById(id) {
   return result.rows[0];
 }
 
-async function createOrder({ invoice_no, customer_name, payment_method, subtotal, tax, discount, grand_total, items }) {
-  if (!Array.isArray(items) || items.length === 0) {
-    const error = new Error('Order items are required and must be a non-empty array');
-    error.code = 'INVALID_ORDER_PAYLOAD';
-    throw error;
-  }
-
-  const client = await pool.connect();
-  try {
-    await client.query('BEGIN');
-
-    const orderResult = await client.query(
-      `INSERT INTO orders (invoice_no, customer_name, payment_method, subtotal, tax, discount, grand_total, "created_at", "updated_at")
-       VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW()) RETURNING *`,
-      [invoice_no, customer_name, payment_method, subtotal, tax, discount, grand_total]
-    );
-
-    const order = orderResult.rows[0];
-    const insertedItems = [];
-
-    for (const item of items) {
-      if (item.product_id == null || item.product_name == null || item.price == null || item.quantity == null || item.total == null) {
-        const error = new Error('Each order item must include product_id, product_name, price, quantity, and total');
-        error.code = 'INVALID_ORDER_PAYLOAD';
-        throw error;
-      }
-
-      const result = await client.query(
-        `INSERT INTO order_items (order_id, product_id, product_name, price, quantity, total)
-         VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-        [order.id, item.product_id, item.product_name, item.price, item.quantity, item.total]
-      );
-      insertedItems.push(result.rows[0]);
-    }
-
-    await client.query('COMMIT');
-    return { ...order, items: insertedItems };
-  } catch (err) {
-    await client.query('ROLLBACK');
-    throw err;
-  } finally {
-    client.release();
-  }
+async function insertOrder(orderData, client = pool) {
+  const { invoice_no, customer_name, payment_method, subtotal, tax, discount, grand_total } = orderData;
+  const result = await client.query(
+    `INSERT INTO orders (invoice_no, customer_name, payment_method, subtotal, tax, discount, grand_total, "created_at", "updated_at")
+     VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW())
+     RETURNING *`,
+    [invoice_no, customer_name, payment_method, subtotal, tax, discount, grand_total]
+  );
+  return result.rows[0];
 }
+
+async function insertOrderItem(orderId, item, client = pool) {
+  const { product_id, product_name, price, quantity, total } = item;
+  const result = await client.query(
+    `INSERT INTO order_items (order_id, product_id, product_name, price, quantity, total)
+     VALUES ($1, $2, $3, $4, $5, $6)
+     RETURNING *`,
+    [orderId, product_id, product_name, price, quantity, total]
+  );
+  return result.rows[0];
+}
+
+
 
 async function updateOrderById(id, { invoice_no, customer_name, payment_method, subtotal, tax, discount, grand_total }) {
   const result = await pool.query(
@@ -108,7 +88,8 @@ async function deleteOrderById(id) {
 module.exports = {
   getAllOrders,
   getOrderById,
-  createOrder,
+  insertOrder,
+  insertOrderItem,
   updateOrderById,
   deleteOrderById,
 };

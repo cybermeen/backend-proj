@@ -1,8 +1,9 @@
+//purchase from supplier
 const pool = require('../config/db');
 
 async function getAllPurchases() {
   const result = await pool.query(
-    'SELECT * FROM purchases ORDER BY "createdAt" DESC'
+    'SELECT * FROM purchases ORDER BY "created_at" DESC'
   );
   return result.rows;
 }
@@ -27,37 +28,23 @@ async function getPurchaseById(id) {
   return result.rows[0];
 }
 
-async function createPurchase({ invoice_no, supplier_name, grand_total, items }) {
-  const client = await pool.connect();
-  try {
-    await client.query('BEGIN');
-
+async function insertPurchase({ invoice_no, supplier_name, grand_total, items, client = pool }) {
     const purchaseResult = await client.query(
-      `INSERT INTO purchases (invoice_no, supplier_name, grand_total, "createdAt", "updatedAt")
+      `INSERT INTO purchases (invoice_no, supplier_name, grand_total, "created_at", "updated_at")
        VALUES ($1, $2, $3, NOW(), NOW()) RETURNING *`,
       [invoice_no, supplier_name, grand_total]
     );
+    return purchaseResult.rows[0];
+}
 
-    const purchase = purchaseResult.rows[0];
-    const insertedItems = [];
-
-    for (const item of items) {
-      const result = await client.query(
-        `INSERT INTO purchase_items (purchase_id, product_id, product_name, cost_price, quantity, total)
-         VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-        [purchase.id, item.product_id, item.product_name, item.cost_price, item.quantity, item.total]
-      );
-      insertedItems.push(result.rows[0]);
-    }
-
-    await client.query('COMMIT');
-    return { ...purchase, items: insertedItems };
-  } catch (err) {
-    await client.query('ROLLBACK');
-    throw err;
-  } finally {
-    client.release();
-  }
+async function insertPurchaseItem(purchaseId, item, client = pool) {
+    const { product_id, product_name, cost_price, quantity, total } = item;
+    const result = await client.query(
+      `INSERT INTO purchase_items (purchase_id, product_id, product_name, cost_price, quantity, total)
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [purchaseId, product_id, product_name, cost_price, quantity, total]
+    );
+    return result.rows[0];
 }
 
 async function updatePurchaseById(id, { invoice_no, supplier_name, grand_total }) {
@@ -66,7 +53,7 @@ async function updatePurchaseById(id, { invoice_no, supplier_name, grand_total }
      SET invoice_no = $1,
          supplier_name = $2,
          grand_total = $3,
-         "updatedAt" = NOW()
+         "updated_at" = NOW()
      WHERE id = $4 RETURNING *`,
     [invoice_no, supplier_name, grand_total, id]
   );
@@ -92,7 +79,8 @@ async function deletePurchaseById(id) {
 module.exports = {
   getAllPurchases,
   getPurchaseById,
-  createPurchase,
+  insertPurchase,
+  insertPurchaseItem,
   updatePurchaseById,
   deletePurchaseById,
 };

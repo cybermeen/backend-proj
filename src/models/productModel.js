@@ -1,3 +1,4 @@
+//inventory
 const pool = require('../config/db');
 
 async function getAllProducts() {
@@ -10,8 +11,8 @@ async function getAllProducts() {
   return result.rows;
 }
 
-async function getProductById(id) {
-  const result = await pool.query(
+async function getProductById(id, client = pool) {
+  const result = await client.query(
     `SELECT p.*, c.name AS category_name
      FROM products p
      LEFT JOIN categories c ON p.category_id = c.id
@@ -21,15 +22,17 @@ async function getProductById(id) {
   return result.rows[0];
 }
 
+//adding new product to inventory
 async function createProduct({ category_id, name, price, image, status, stock, minimum_stock }) {
   const result = await pool.query(
-    `INSERT INTO products (category_id, name, price, image, status, stock, minimum_stock, "createdAt", "updatedAt")
+    `INSERT INTO products (category_id, name, price, image, status, stock, minimum_stock, "created_at", "updated_at")
      VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW()) RETURNING *`,
     [category_id, name, price, image, status ?? true, stock ?? 0, minimum_stock ?? 0]
   );
   return result.rows[0];
 }
 
+//updating any attribute of an existing product 
 async function updateProductById(id, { category_id, name, price, image, status, stock, minimum_stock }) {
   const result = await pool.query(
     `UPDATE products
@@ -40,7 +43,7 @@ async function updateProductById(id, { category_id, name, price, image, status, 
          status = $5,
          stock = $6,
          minimum_stock = $7,
-         "updatedAt" = NOW()
+         "updated_at" = NOW()
      WHERE id = $8 RETURNING *`,
     [category_id, name, price, image, status, stock, minimum_stock, id]
   );
@@ -55,10 +58,36 @@ async function deleteProductById(id) {
   return result.rows[0];
 }
 
+//increasing stock of existing product
+async function increaseStock(productId, quantity, client = pool) {
+  const result = await client.query(
+    `UPDATE products
+     SET stock = stock + $1
+     WHERE id = $2
+     RETURNING *`,
+    [quantity, productId]
+  );
+  return result.rows[0];
+}
+
+//decreasing stock of existing product
+async function decreaseStock(productId, quantity, client = pool) {
+  const result = await client.query(
+    `UPDATE products
+     SET stock = stock - $1
+     WHERE id = $2
+     RETURNING *`,
+    [quantity, productId]
+  );
+  return result.rows[0];
+}
+
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
   updateProductById,
   deleteProductById,
+  increaseStock,
+  decreaseStock
 };
