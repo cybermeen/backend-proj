@@ -11,7 +11,7 @@ async function getAllProducts(req, res) {
     res.status(HTTP_STATUS.OK).json(products);
   } catch (err) {
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getUsersNotFoundMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getProductFetchFailedMessage() });
   }
 }
 
@@ -25,7 +25,7 @@ async function getProductById(req, res) {
       return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
     }
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getUsersNotFoundMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getProductFetchFailedMessage() });
   }
 }
 
@@ -35,7 +35,7 @@ async function createProduct(req, res) {
     res.status(HTTP_STATUS.CREATED).json(product);
   } catch (err) {
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getRegistrationFailedMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getProductCreationFailedMessage() });
   }
 }
 
@@ -49,7 +49,7 @@ async function updateProduct(req, res) {
       return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
     }
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getRegistrationFailedMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getProductProcessingFailedMessage() });
   }
 }
 
@@ -63,7 +63,7 @@ async function deleteProduct(req, res) {
       return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
     }
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getRegistrationFailedMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getProductProcessingFailedMessage() });
   }
 }
 

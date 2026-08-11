@@ -11,7 +11,7 @@ async function getAllPurchases(req, res) {
     res.status(HTTP_STATUS.OK).json(purchases);
   } catch (err) {
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getUsersNotFoundMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getPurchaseFetchFailedMessage() });
   }
 }
 
@@ -25,7 +25,7 @@ async function getPurchaseById(req, res) {
       return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
     }
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getUsersNotFoundMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getPurchaseFetchFailedMessage() });
   }
 }
 
@@ -34,8 +34,14 @@ async function createPurchase(req, res) {
     const purchase = await purchaseService.createPurchase(req.body);
     res.status(HTTP_STATUS.CREATED).json(purchase);
   } catch (err) {
+    if (err.code === 'INVALID_PURCHASE_PAYLOAD') {
+      return res.status(HTTP_STATUS.BAD_REQUEST).json({ error: err.message });
+    }
+    if (err.code === 'PRODUCT_NOT_FOUND') {
+      return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
+    }
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getRegistrationFailedMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getPurchaseCreationFailedMessage() });
   }
 }
 
@@ -49,7 +55,7 @@ async function updatePurchase(req, res) {
       return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
     }
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getRegistrationFailedMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getPurchaseProcessingFailedMessage() });
   }
 }
 
@@ -63,7 +69,7 @@ async function deletePurchase(req, res) {
       return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
     }
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getRegistrationFailedMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getPurchaseProcessingFailedMessage() });
   }
 }
 

@@ -11,7 +11,7 @@ async function getAllOrders(req, res) {
     res.status(HTTP_STATUS.OK).json(orders);
   } catch (err) {
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getUsersNotFoundMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getOrderFetchFailedMessage() });
   }
 }
 
@@ -25,7 +25,7 @@ async function getOrderById(req, res) {
       return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
     }
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getUsersNotFoundMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getOrderFetchFailedMessage() });
   }
 }
 
@@ -43,6 +43,12 @@ async function createOrder(req, res) {
     if (err.code === 'INVALID_ORDER_PAYLOAD') {
       return res.status(HTTP_STATUS.BAD_REQUEST).json({ error: err.message });
     }
+    if (err.code === 'PRODUCT_NOT_FOUND') {
+      return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
+    }
+    if (err.code === 'INSUFFICIENT_STOCK') {
+      return res.status(HTTP_STATUS.BAD_REQUEST).json({ error: err.message });
+    }
     console.error(err);
     res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getOrderCreationFailedMessage() });
   }
@@ -58,7 +64,7 @@ async function updateOrder(req, res) {
       return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
     }
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getRegistrationFailedMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getOrderProcessingFailedMessage() });
   }
 }
 
@@ -72,7 +78,7 @@ async function deleteOrder(req, res) {
       return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
     }
     console.error(err);
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getRegistrationFailedMessage() });
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: errorMessages.getOrderProcessingFailedMessage() });
   }
 }
 
