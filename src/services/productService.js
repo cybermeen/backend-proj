@@ -39,10 +39,32 @@ async function deleteProductById(id) {
   return product;
 }
 
+async function increaseStock(productId, quantity) {
+  const product = await productModel.increaseStock(productId, quantity);
+  if (!product) {
+    const error = new Error(errorMessages.getProductNotFoundMessage());
+    error.code = 'PRODUCT_NOT_FOUND';
+    throw error;
+  }
+  return product;
+}
+
+async function decreaseStock(productId, quantity) {
+  const product = await productModel.decreaseStock(productId, quantity);
+  if (!product) {
+    const error = new Error(errorMessages.getProductNotFoundMessage());
+    error.code = 'PRODUCT_NOT_FOUND';
+    throw error;
+  }
+  return product;
+}
+
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
   updateProductById,
   deleteProductById,
+  increaseStock,
+  decreaseStock
 };
