@@ -1,0 +1,17 @@
+$kind: http-request
+name: Create category
+url: http://localhost:3000/categories
+method: POST
+headers:
+  x-api-key: '{{api_key}}'
+body:
+  type: json
+  content: |-
+    {
+      "name": "Electronics"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: '{{access_token}}'
+order: 1786527881403

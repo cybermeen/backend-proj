@@ -1,0 +1,23 @@
+$kind: http-request
+name: Create product
+url: http://localhost:3000/products
+method: POST
+headers:
+  x-api-key: '{{api_key}}'
+body:
+  type: json
+  content: |-
+    {
+      "category_id": 1,
+      "name": "Sample Product",
+      "price": 99.99,
+      "image": "https://example.com/product.jpg",
+      "status": true,
+      "stock": 25,
+      "minimum_stock": 5
+    }
+auth:
+  type: bearer
+  credentials:
+    token: '{{access_token}}'
+order: 1786527881003

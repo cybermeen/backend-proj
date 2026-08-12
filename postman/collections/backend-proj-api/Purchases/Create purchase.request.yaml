@@ -1,0 +1,25 @@
+$kind: http-request
+name: Create purchase
+url: http://localhost:3000/purchases
+method: POST
+headers:
+  x-api-key: '{{api_key}}'
+body:
+  type: json
+  content: |-
+    {
+      "invoice_no": "PUR-1001",
+      "supplier_name": "Acme Supplies",
+      "items": [
+        {
+          "product_id": 1,
+          "quantity": 10,
+          "cost_price": 45.5
+        }
+      ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: '{{access_token}}'
+order: 1786527881103

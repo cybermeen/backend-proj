@@ -1,0 +1,19 @@
+$kind: http-request
+name: Update purchase
+url: http://localhost:3000/purchases/1
+method: PUT
+headers:
+  x-api-key: '{{api_key}}'
+body:
+  type: json
+  content: |-
+    {
+      "invoice_no": "PUR-1001-UPDATED",
+      "supplier_name": "Acme Supplies Ltd",
+      "grand_total": 455
+    }
+auth:
+  type: bearer
+  credentials:
+    token: '{{access_token}}'
+order: 1786527881104

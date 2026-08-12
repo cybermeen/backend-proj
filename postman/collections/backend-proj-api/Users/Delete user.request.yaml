@@ -1,6 +1,7 @@
 $kind: http-request
+name: Delete user
 url: http://localhost:3000/users/1
-method: GET
+method: DELETE
 headers:
   x-api-key: "{{api_key}}"
-order: 3798271282112079
+order: 3669907052111671

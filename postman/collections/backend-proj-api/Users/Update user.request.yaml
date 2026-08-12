@@ -1,13 +1,9 @@
 $kind: http-request
+name: Update user
 url: http://localhost:3000/users
-method: GET
-headers:
-  x-api-key: "{{api_key}}"
-body:
-  type: json
-  content: ""
+method: PUT
 auth:
   type: bearer
   credentials:
     token: "{{access_token}}"
-order: 3193129748654195
+order: 3656570961462652

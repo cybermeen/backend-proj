@@ -1,9 +1,0 @@
-$kind: http-request
-name: Update user
-url: http://localhost:3000/users
-method: PUT
-auth:
-  type: bearer
-  credentials:
-    token: "{{access_token}}"
-order: 4484244712368201

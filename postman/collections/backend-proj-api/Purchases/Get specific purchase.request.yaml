@@ -1,0 +1,11 @@
+$kind: http-request
+name: Get specific purchase
+url: http://localhost:3000/purchases/1
+method: GET
+headers:
+  x-api-key: '{{api_key}}'
+auth:
+  type: bearer
+  credentials:
+    token: '{{access_token}}'
+order: 1786527881102

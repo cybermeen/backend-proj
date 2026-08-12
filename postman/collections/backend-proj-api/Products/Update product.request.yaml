@@ -1,0 +1,23 @@
+$kind: http-request
+name: Update product
+url: http://localhost:3000/products/1
+method: PUT
+headers:
+  x-api-key: '{{api_key}}'
+body:
+  type: json
+  content: |-
+    {
+      "category_id": 1,
+      "name": "Updated Product",
+      "price": 109.99,
+      "image": "https://example.com/product-updated.jpg",
+      "status": true,
+      "stock": 30,
+      "minimum_stock": 8
+    }
+auth:
+  type: bearer
+  credentials:
+    token: '{{access_token}}'
+order: 1786527881004

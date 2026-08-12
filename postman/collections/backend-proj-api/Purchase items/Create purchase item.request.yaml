@@ -1,0 +1,22 @@
+$kind: http-request
+name: Create purchase item
+url: http://localhost:3000/purchase-items
+method: POST
+headers:
+  x-api-key: '{{api_key}}'
+body:
+  type: json
+  content: |-
+    {
+      "purchase_id": 1,
+      "product_id": 1,
+      "product_name": "Sample Product",
+      "cost_price": 45.5,
+      "quantity": 10,
+      "total": 455
+    }
+auth:
+  type: bearer
+  credentials:
+    token: '{{access_token}}'
+order: 1786527881303
