@@ -1,0 +1,11 @@
+$kind: http-request
+name: Delete order
+url: http://localhost:3000/orders
+method: DELETE
+headers:
+  x-api-key: "{{api_key}}"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 4496027737556563
