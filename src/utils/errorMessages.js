@@ -117,11 +117,29 @@ function getUserNotFoundMessage() {
 function getMissingTokenMessage() {
   return 'Missing or malformed Authorization header. Expected: Bearer <token>';
 }
+
 function getExpiredTokenMessage() {
   return 'Your session has expired. Please log in again';
 }
+
 function getInvalidTokenMessage() {
   return 'Invalid authentication token';
+}
+
+function getMissingProductIdMessage() {
+  return 'Missing productId query parameter';
+}
+
+function getFetchFailedMessage() {
+  return 'Failed to fetch data';
+}
+
+function getInvalidDateMessage() {
+  return 'Invalid date format. Use YYYY-MM-DD';
+} 
+
+function getInvalidDateRangeMessage() {
+  return 'Invalid date range. Ensure both "from" and "to" are provided in YYYY-MM-DD format';
 }
 
 module.exports = {
@@ -156,5 +174,9 @@ module.exports = {
   getUserNotFoundMessage,
   getMissingTokenMessage,
   getExpiredTokenMessage,
-  getInvalidTokenMessage
+  getInvalidTokenMessage,
+  getMissingProductIdMessage,
+  getFetchFailedMessage,
+  getInvalidDateMessage,
+  getInvalidDateRangeMessage
 };
