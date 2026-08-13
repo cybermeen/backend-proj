@@ -20,7 +20,7 @@ async function getCounters() {
 }
 
 async function getSalesSummary() {
-  const row = await reportModel.getSalesSummary();
+  const row = await reportsModel.getSalesSummary();
   return {
     totalSales: Number(row.total_sales),
     totalOrders: Number(row.total_orders),
@@ -32,7 +32,7 @@ async function getSalesSummary() {
 }
 
 async function getDailySales(date) {
-  const row = await reportModel.getDailySales(date);
+  const row = await reportsModel.getDailySales(date);
   const sales = Number(row.sales);
   const tax = Number(row.tax);
   const discount = Number(row.discount);
@@ -47,7 +47,7 @@ async function getDailySales(date) {
 }
 
 async function getSalesRange(from, to) {
-  const row = await reportModel.getSalesRange(from, to);
+  const row = await reportsModel.getSalesRange(from, to);
   return {
     from,
     to,
@@ -59,7 +59,7 @@ async function getSalesRange(from, to) {
 }
 
 async function getPaymentsSummary() {
-  const rows = await reportModel.getPaymentsSummary();
+  const rows = await reportsModel.getPaymentsSummary();
   return rows.map((row) => ({
     paymentMethod: row.payment_method,
     orders: Number(row.orders),
@@ -68,7 +68,7 @@ async function getPaymentsSummary() {
 }
 
 async function getTopSellingProducts(limit) {
-  const rows = await reportModel.getTopSellingProducts(limit);
+  const rows = await reportsModel.getTopSellingProducts(limit);
   return rows.map((row) => ({
     productId: row.product_id,
     productName: row.product_name,
@@ -78,7 +78,7 @@ async function getTopSellingProducts(limit) {
 }
 
 async function getProductSummary(productId) {
-  const row = await reportModel.getProductSummary(productId);
+  const row = await reportsModel.getProductSummary(productId);
   if (!row) {
     const error = new Error(errorMessages.getProductNotFoundMessage());
     error.code = 'PRODUCT_NOT_FOUND';
@@ -95,7 +95,7 @@ async function getProductSummary(productId) {
 }
 
 async function getCategorySummary() {
-  const rows = await reportModel.getCategorySummary();
+  const rows = await reportsModel.getCategorySummary();
   return rows.map((row) => ({
     categoryId: row.category_id,
     categoryName: row.category_name,
@@ -105,7 +105,7 @@ async function getCategorySummary() {
 }
 
 async function getPurchasesSummary() {
-  const row = await reportModel.getPurchasesSummary();
+  const row = await reportsModel.getPurchasesSummary();
   return {
     totalPurchases: Number(row.total_purchases),
     totalPurchaseAmount: Number(row.total_purchase_amount),
@@ -114,7 +114,7 @@ async function getPurchasesSummary() {
 }
 
 async function getDailyPurchases(date) {
-  const row = await reportModel.getDailyPurchases(date);
+  const row = await reportsModel.getDailyPurchases(date);
   return {
     date,
     purchaseCount: Number(row.purchase_count),
@@ -123,7 +123,7 @@ async function getDailyPurchases(date) {
 }
 
 async function getInventorySummary() {
-  const row = await reportModel.getInventorySummary();
+  const row = await reportsModel.getInventorySummary();
   return {
     totalProducts: Number(row.total_products),
     totalStock: Number(row.total_stock),
@@ -133,7 +133,7 @@ async function getInventorySummary() {
 }
 
 async function getLowStockInventory() {
-  const rows = await reportModel.getLowStockInventory();
+  const rows = await reportsModel.getLowStockInventory();
   return rows.map((row) => ({
     productId: row.product_id,
     productName: row.product_name,
