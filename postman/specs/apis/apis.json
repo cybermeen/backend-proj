@@ -1,0 +1,922 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "apis",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Login",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "username": "za_dev",
+                "password": "SecurePass123!"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "summary": "Register",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ZarmeenATK"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Get all users",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user",
+        "responses": {},
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/1": {
+      "get": {
+        "summary": "Get specific user",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "summary": "Delete user",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/purchases": {
+      "get": {
+        "summary": "Get all purchases",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Purchases"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create purchase",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Purchases"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "invoice_no": {
+                    "type": "string"
+                  },
+                  "supplier_name": {
+                    "type": "string"
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "product_id": {
+                          "type": "integer"
+                        },
+                        "quantity": {
+                          "type": "integer"
+                        },
+                        "cost_price": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "invoice_no": "PUR-1001",
+                "supplier_name": "Acme Supplies",
+                "items": [
+                  {
+                    "product_id": 1,
+                    "quantity": 10,
+                    "cost_price": 45.5
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/purchases/1": {
+      "get": {
+        "summary": "Get specific purchase",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Purchases"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update purchase",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Purchases"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "invoice_no": {
+                    "type": "string"
+                  },
+                  "supplier_name": {
+                    "type": "string"
+                  },
+                  "grand_total": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "invoice_no": "PUR-1001-UPDATED",
+                "supplier_name": "Acme Supplies Ltd",
+                "grand_total": 455
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete purchase",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Purchases"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "Get all products",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create product",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "status": {
+                    "type": "boolean"
+                  },
+                  "stock": {
+                    "type": "integer"
+                  },
+                  "minimum_stock": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "category_id": 1,
+                "name": "Sample Product",
+                "price": 99.99,
+                "image": "https://example.com/product.jpg",
+                "status": true,
+                "stock": 25,
+                "minimum_stock": 5
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/1": {
+      "get": {
+        "summary": "Get specific product",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update product",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "status": {
+                    "type": "boolean"
+                  },
+                  "stock": {
+                    "type": "integer"
+                  },
+                  "minimum_stock": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "category_id": 1,
+                "name": "Updated Product",
+                "price": 109.99,
+                "image": "https://example.com/product-updated.jpg",
+                "status": true,
+                "stock": 30,
+                "minimum_stock": 8
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete product",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/reports/counters": {
+      "get": {
+        "summary": "Get dashboard",
+        "responses": {},
+        "tags": [
+          "Reports"
+        ]
+      }
+    },
+    "/reports/sales/summary": {
+      "get": {
+        "summary": "Get sales summary",
+        "responses": {},
+        "tags": [
+          "Reports"
+        ]
+      }
+    },
+    "/reports/sales/daily": {
+      "get": {
+        "summary": "Get daily sales",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-01-01"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Reports"
+        ]
+      }
+    },
+    "/reports/sales": {
+      "get": {
+        "summary": "Get sales in range",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-01-01"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-01-31"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/reports/payments/summary": {
+      "get": {
+        "summary": "Get payment summary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/reports/products/summary": {
+      "get": {
+        "summary": "Get products summary",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Reports"
+        ]
+      }
+    },
+    "/reports/products/top-selling": {
+      "get": {
+        "summary": "Get top-selling product",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 10
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Reports"
+        ]
+      }
+    },
+    "/reports/categories/summary": {
+      "get": {
+        "summary": "Get category summary",
+        "responses": {},
+        "tags": [
+          "Reports"
+        ]
+      }
+    },
+    "/reports/purchases/summary": {
+      "get": {
+        "summary": "Get purchases summary",
+        "responses": {},
+        "tags": [
+          "Reports"
+        ]
+      }
+    },
+    "/reports/purchases/daily": {
+      "get": {
+        "summary": "Get daily purchases",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-01-01"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/reports/inventory/summary": {
+      "get": {
+        "summary": "Get inventory summary",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/reports/inventory/low-stock": {
+      "get": {
+        "summary": "Get low stock inventory",
+        "responses": {},
+        "tags": [
+          "Reports"
+        ]
+      }
+    },
+    "/orders": {
+      "post": {
+        "summary": "Create order",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "invoice_no": {
+                    "type": "string"
+                  },
+                  "customer_name": {
+                    "type": "string"
+                  },
+                  "payment_method": {
+                    "type": "string"
+                  },
+                  "subtotal": {
+                    "type": "integer"
+                  },
+                  "tax": {
+                    "type": "integer"
+                  },
+                  "discount": {
+                    "type": "integer"
+                  },
+                  "grand_total": {
+                    "type": "integer"
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "product_id": {
+                          "type": "integer"
+                        },
+                        "product_name": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "integer"
+                        },
+                        "quantity": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "invoice_no": "INV-1234",
+                "customer_name": "John Doe",
+                "payment_method": "card",
+                "subtotal": 80,
+                "tax": 8,
+                "discount": 0,
+                "grand_total": 88,
+                "items": [
+                  {
+                    "product_id": 1,
+                    "product_name": "Widget",
+                    "price": 40,
+                    "quantity": 2,
+                    "total": 80
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all orders",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete order",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{api_key}}"
+          }
+        ],
+        "responses": {},
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

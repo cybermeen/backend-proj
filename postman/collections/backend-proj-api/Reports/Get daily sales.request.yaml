@@ -1,4 +1,13 @@
 $kind: http-request
-url: ""
+name: Get daily sales
+url: http://localhost:3000/reports/sales/daily?date=2026-01-01
 method: GET
+headers:
+  x-api-key: "{{api_key}}"
+queryParams:
+  date: 2026-01-01
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
 order: 4010667980504760

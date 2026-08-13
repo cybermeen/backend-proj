@@ -4,7 +4,9 @@ localResources:
   specs:
     - ../postman/specs/backend-apis/backend-apis.json
     - ../postman/specs/backend-spec/backend-spec.json
+    - ../postman/specs/apis/apis.json
 resourceNameMappings:
   specs:
     - ../postman/specs/backend-apis/backend-apis.json: backend-apis
     - ../postman/specs/backend-spec/backend-spec.json: backend-spec
+    - ../postman/specs/apis/apis.json: apis

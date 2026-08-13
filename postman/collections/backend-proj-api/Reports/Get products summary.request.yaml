@@ -1,4 +1,13 @@
 $kind: http-request
-url: ""
+name: Get products summary
+url: http://localhost:3000/reports/products/summary?productId=1
 method: GET
+headers:
+  x-api-key: "{{api_key}}"
+queryParams:
+  productId: "1"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
 order: 4434555696911215

@@ -1,4 +1,11 @@
 $kind: http-request
-url: ""
+name: Get sales summary
+url: http://localhost:3000/reports/sales/summary
 method: GET
+headers:
+  x-api-key: "{{api_key}}"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
 order: 1933181205948609

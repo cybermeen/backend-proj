@@ -1,4 +1,11 @@
 $kind: http-request
-url: ""
+name: Get low stock inventory
+url: http://localhost:3000/reports/inventory/low-stock
 method: GET
+headers:
+  x-api-key: "{{api_key}}"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
 order: 4503594237896433

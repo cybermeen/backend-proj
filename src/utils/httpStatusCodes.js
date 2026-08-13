@@ -1,5 +1,5 @@
 const HTTP_STATUS = Object.freeze({
-  OK: 200,                // data safely retrieved or updated.
+  OK: 200,                // data safely retrieved or updated
   CREATED: 201,           // new resource successfully generated
   BAD_REQUEST: 400,       // server cannot parse the request due to malformed syntax
   UNAUTHORIZED: 401,      // authentication is required but has failed or not yet provided

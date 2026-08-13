@@ -1,4 +1,13 @@
 $kind: http-request
-url: ""
+name: Get top-selling product
+url: http://localhost:3000/reports/products/top-selling?limit=10
 method: GET
+headers:
+  x-api-key: "{{api_key}}"
+queryParams:
+  limit: "10"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
 order: 4480335369146843

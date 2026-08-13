@@ -1,4 +1,14 @@
 $kind: http-request
-url: ""
+name: Get sales in range
+url: http://localhost:3000/reports/sales?from=2026-01-01&to=2026-01-31
 method: GET
+headers:
+  x-api-key: "{{api_key}}"
+queryParams:
+  from: 2026-01-01
+  to: 2026-01-31
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
 order: 4345703576808035
