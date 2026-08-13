@@ -21,7 +21,9 @@ const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
 async function salesSummary(req, res) {
   try {
-    const data = await reportService.getSalesSummary();
+    console.log("I am here");
+    
+    const data = await reportsService.getSalesSummary();
     res.status(HTTP_STATUS.OK).json(successResponse('Sales summary retrieved', data));
   } catch (err) {
     console.error(err);
@@ -35,7 +37,7 @@ async function dailySales(req, res) {
     if (!date || !DATE_REGEX.test(date)) {
       return res.status(HTTP_STATUS.BAD_REQUEST).json({ error: errorMessages.getInvalidDateMessage() });
     }
-    const data = await reportService.getDailySales(date);
+    const data = await reportsService.getDailySales(date);
     res.status(HTTP_STATUS.OK).json(successResponse('Daily sales retrieved', data));
   } catch (err) {
     console.error(err);
@@ -49,7 +51,7 @@ async function salesRange(req, res) {
     if (!from || !to || !DATE_REGEX.test(from) || !DATE_REGEX.test(to)) {
       return res.status(HTTP_STATUS.BAD_REQUEST).json({ error: errorMessages.getInvalidDateRangeMessage() });
     }
-    const data = await reportService.getSalesRange(from, to);
+    const data = await reportsService.getSalesRange(from, to);
     res.status(HTTP_STATUS.OK).json(successResponse('Sales range retrieved', data));
   } catch (err) {
     console.error(err);
@@ -59,7 +61,7 @@ async function salesRange(req, res) {
 
 async function paymentsSummary(req, res) {
   try {
-    const data = await reportService.getPaymentsSummary();
+    const data = await reportsService.getPaymentsSummary();
     res.status(HTTP_STATUS.OK).json(successResponse('Payments summary retrieved', data));
   } catch (err) {
     console.error(err);
@@ -70,7 +72,7 @@ async function paymentsSummary(req, res) {
 async function topSellingProducts(req, res) {
   try {
     const limit = Number(req.query.limit) || 10;
-    const data = await reportService.getTopSellingProducts(limit);
+    const data = await reportsService.getTopSellingProducts(limit);
     res.status(HTTP_STATUS.OK).json(successResponse('Top selling products retrieved', data));
   } catch (err) {
     console.error(err);
@@ -84,7 +86,7 @@ async function productSummary(req, res) {
     if (!productId) {
       return res.status(HTTP_STATUS.BAD_REQUEST).json({ error: errorMessages.getMissingProductIdMessage() });
     }
-    const data = await reportService.getProductSummary(productId);
+    const data = await reportsService.getProductSummary(productId);
     res.status(HTTP_STATUS.OK).json(successResponse('Product summary retrieved', data));
   } catch (err) {
     if (err.code === 'PRODUCT_NOT_FOUND') return res.status(HTTP_STATUS.NOT_FOUND).json({ error: err.message });
@@ -95,7 +97,7 @@ async function productSummary(req, res) {
 
 async function categorySummary(req, res) {
   try {
-    const data = await reportService.getCategorySummary();
+    const data = await reportsService.getCategorySummary();
     res.status(HTTP_STATUS.OK).json(successResponse('Category summary retrieved', data));
   } catch (err) {
     console.error(err);
@@ -105,7 +107,7 @@ async function categorySummary(req, res) {
 
 async function purchasesSummary(req, res) {
   try {
-    const data = await reportService.getPurchasesSummary();
+    const data = await reportsService.getPurchasesSummary();
     res.status(HTTP_STATUS.OK).json(successResponse('Purchases summary retrieved', data));
   } catch (err) {
     console.error(err);
@@ -119,7 +121,7 @@ async function dailyPurchases(req, res) {
     if (!date || !DATE_REGEX.test(date)) {
       return res.status(HTTP_STATUS.BAD_REQUEST).json({ error: errorMessages.getInvalidDateMessage() });
     }
-    const data = await reportService.getDailyPurchases(date);
+    const data = await reportsService.getDailyPurchases(date);
     res.status(HTTP_STATUS.OK).json(successResponse('Daily purchases retrieved', data));
   } catch (err) {
     console.error(err);
@@ -129,7 +131,7 @@ async function dailyPurchases(req, res) {
 
 async function inventorySummary(req, res) {
   try {
-    const data = await reportService.getInventorySummary();
+    const data = await reportsService.getInventorySummary();
     res.status(HTTP_STATUS.OK).json(successResponse('Inventory summary retrieved', data));
   } catch (err) {
     console.error(err);
@@ -139,7 +141,7 @@ async function inventorySummary(req, res) {
 
 async function lowStockInventory(req, res) {
   try {
-    const data = await reportService.getLowStockInventory();
+    const data = await reportsService.getLowStockInventory();
     res.status(HTTP_STATUS.OK).json(successResponse('Low stock inventory retrieved', data));
   } catch (err) {
     console.error(err);
