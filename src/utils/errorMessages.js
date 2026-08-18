@@ -142,6 +142,18 @@ function getInvalidDateRangeMessage() {
   return 'Invalid date range. Ensure both "from" and "to" are provided in YYYY-MM-DD format';
 }
 
+function getRouteNotFoundMessage() {
+  return 'Route not found';
+}
+
+function getMalformedRequestMessage() {
+  return 'Malformed request body. Ensure it is valid JSON';
+}
+
+function getUnexpectedErrorMessage() {
+  return 'An unexpected error occurred. Please try again later';
+} 
+
 module.exports = {
   getRegistrationValidationMessage,
   getInvalidCredentialsMessage,
@@ -178,5 +190,8 @@ module.exports = {
   getMissingProductIdMessage,
   getFetchFailedMessage,
   getInvalidDateMessage,
-  getInvalidDateRangeMessage
+  getInvalidDateRangeMessage,
+  getRouteNotFoundMessage,
+  getMalformedRequestMessage,
+  getUnexpectedErrorMessage
 };
