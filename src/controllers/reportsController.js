@@ -21,8 +21,6 @@ const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
 async function salesSummary(req, res) {
   try {
-    console.log("I am here");
-    
     const data = await reportsService.getSalesSummary();
     res.status(HTTP_STATUS.OK).json(successResponse('Sales summary retrieved', data));
   } catch (err) {

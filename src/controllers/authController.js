@@ -29,6 +29,9 @@ async function register(req, res) {
 async function login(req, res) {
   try {
     const { username, password, api_key: bodyApiKey } = req.body;
+    console.log("Api data", req
+    );
+    
     const providedApiKey = req.header('x-api-key');
 
 
