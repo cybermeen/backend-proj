@@ -107,16 +107,31 @@ async function updatePurchaseById(id, payload) {
 }
 
 async function deletePurchaseById(id) {
-  const purchase = await purchaseModel.deletePurchaseById(id);
-    for (const item of order.items) {
-      await productModel.increaseStock(item.product_id, item.quantity, client);
+  const purchase = await purchaseModel.getPurchaseById(id);
+  if (!purchase) {
+    const error = new Error(errorMessages.getPurchaseNotFoundMessage());
+    error.code = 'PURCHASE_NOT_FOUND';
+    throw error;
+  }
+
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN');
+
+    for (const item of purchase.items || []) {
+      await productModel.decreaseStock(item.product_id, item.quantity, client);
     }
-    if (!order) {
-      const error = new Error(errorMessages.getPurchaseNotFoundMessage());
-      error.code = 'PURCHASE_NOT_FOUND';
-      throw error;
-    }
-    return order;
+
+    const deletedPurchase = await purchaseModel.deletePurchaseById(id, client);
+    await client.query('COMMIT');
+    return deletedPurchase;
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
 }
 
 module.exports = {
