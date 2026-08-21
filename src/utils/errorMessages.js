@@ -114,6 +114,42 @@ function getUserNotFoundMessage() {
   return 'User not found';
 }
 
+function getRoleNotFoundMessage() {
+  return 'Role not found';
+}
+
+function getRolesFetchFailedMessage() {
+  return 'Unable to fetch roles';
+}
+
+function getRoleFetchFailedMessage() {
+  return 'Unable to fetch role';
+}
+
+function getRoleValidationMessage() {
+  return 'role_name is required, and status must be a boolean when provided';
+}
+
+function getRoleCreationFailedMessage() {
+  return 'Role creation failed';
+}
+
+function getRoleUpdateFailedMessage() {
+  return 'Role update failed';
+}
+
+function getRoleDeleteFailedMessage() {
+  return 'Role deletion failed';
+}
+
+function getDuplicateRoleMessage() {
+  return 'Role name already exists';
+}
+
+function getRoleInUseMessage() {
+  return 'Role cannot be deleted because it is assigned to a user';
+}
+
 function getMissingTokenMessage() {
   return 'Missing or malformed Authorization header. Expected: Bearer <token>';
 }
@@ -184,6 +220,15 @@ module.exports = {
   getApiKeyValidationFailedMessage,
   getUsersNotFoundMessage,
   getUserNotFoundMessage,
+  getRoleNotFoundMessage,
+  getRolesFetchFailedMessage,
+  getRoleFetchFailedMessage,
+  getRoleValidationMessage,
+  getRoleCreationFailedMessage,
+  getRoleUpdateFailedMessage,
+  getRoleDeleteFailedMessage,
+  getDuplicateRoleMessage,
+  getRoleInUseMessage,
   getMissingTokenMessage,
   getExpiredTokenMessage,
   getInvalidTokenMessage,

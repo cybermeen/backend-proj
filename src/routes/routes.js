@@ -6,9 +6,11 @@ const purchaseController = require('../controllers/purchaseController');
 const productController = require('../controllers/productController');
 const orderController = require('../controllers/orderController');
 const reportsController = require('../controllers/reportsController');
+const roleController = require('../controllers/roleController');
 
 router.use('/auth', authController);
 router.use('/users', userController);
+router.use('/roles', roleController);
 router.use('/reports', reportsController);
 
 router.use('/purchases', purchaseController);
